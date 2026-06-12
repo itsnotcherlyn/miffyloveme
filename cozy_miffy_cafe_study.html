@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cozy miffy cafe study - มุมจดจ่ออ่านหนังสือแสนสงบเงียบ</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Mali & Itim (Cute Thai handwritten fonts) -->
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Mali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Mali', 'Itim', cursive;
+            background-color: #f6f1e5;
+            color: #4a3e3d;
+            background-image: radial-gradient(#dfd7c2 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+        }
+
+        /* Pencil Sketch Borders and Details */
+        .sketch-border {
+            border: 3.5px solid #4a3e3d;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+            box-shadow: 4px 5px 0px 0px #4a3e3d;
+        }
+
+        .sketch-button {
+            border: 2.5px solid #4a3e3d;
+            border-radius: 20px 5px 20px 5px/5px 20px 5px 20px;
+            transition: all 0.25s ease;
+            position: relative;
+            background-color: #ffffff;
+            box-shadow: 2px 3px 0px 0px #4a3e3d;
+        }
+
+        .sketch-button:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0px 0px #4a3e3d;
+        }
+
+        .sketch-button:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px 0px #4a3e3d;
+        }
+
+        /* Animated swinging for the OPEN sign */
+        @keyframes swing {
+            0% { transform: rotate(-6deg); }
+            50% { transform: rotate(6deg); }
+            100% { transform: rotate(-6deg); }
+        }
+        .swinging-sign {
+            transform-origin: top center;
+            animation: swing 3.5s ease-in-out infinite;
+        }
+
+        /* Gentle floating animation for flowers */
+        @keyframes float-flower {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-110px) rotate(360deg); opacity: 0; }
+        }
+        .floating-flower {
+            position: absolute;
+            animation: float-flower 9s linear infinite;
+            pointer-events: none;
+        }
+
+        /* Custom scrollbar */
+        .custom-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #eedcb5;
+            border-radius: 10px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #8b745a;
+            border-radius: 10px;
+            border: 2px solid #eedcb5;
+        }
+
+        /* Dynamic Window scenery image transition effect */
+        .scenery-view {
+            transition: opacity 1.5s ease-in-out;
+            background-position: center;
+            background-size: cover;
+        }
+
+        /* Sun and Moon Orbit path */
+        @keyframes sun-orbit {
+            0% { transform: translate(-30px, 120px) rotate(0deg); opacity: 0; }
+            15% { opacity: 1; }
+            50% { transform: translate(50px, -20px) rotate(180deg); opacity: 1; }
+            85% { opacity: 1; }
+            100% { transform: translate(140px, 120px) rotate(360deg); opacity: 0; }
+        }
+        @keyframes moon-orbit {
+            0% { transform: translate(-30px, 120px) rotate(0deg); opacity: 0; }
+            15% { opacity: 1; }
+            50% { transform: translate(50px, -10px) rotate(180deg); opacity: 1; }
+            85% { opacity: 1; }
+            100% { transform: translate(140px, 120px) rotate(360deg); opacity: 0; }
+        }
+
+        .sketchy-sun-orbit {
+            animation: sun-orbit 35s linear infinite;
+        }
+        .sketchy-moon-orbit {
+            animation: moon-orbit 35s linear infinite;
+        }
+
+        /* Walkers Outside Windows - Miffies walking */
+        @keyframes walk-left-right {
+            0% { left: -60px; transform: scaleX(1); }
+            48% { transform: scaleX(1); }
+            50% { transform: scaleX(-1); }
+            98% { transform: scaleX(-1); }
+            100% { left: -60px; }
+        }
+        @keyframes walk-right-left {
+            0% { left: 180px; transform: scaleX(-1); }
+            48% { transform: scaleX(-1); }
+            50% { transform: scaleX(1); }
+            98% { transform: scaleX(1); }
+            100% { left: 180px; }
+        }
+        @keyframes hop-across {
+            0% { left: -40px; transform: translateY(0); }
+            10% { transform: translateY(-10px); }
+            20% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+            40% { transform: translateY(0); }
+            50% { left: 160px; transform: scaleX(-1); }
+            60% { transform: translateY(-10px); }
+            70% { transform: translateY(0); }
+            80% { transform: translateY(-10px); }
+            90% { transform: translateY(0); }
+            100% { left: -40px; transform: scaleX(1); }
+        }
+
+        .walker-classic-blue {
+            animation: walk-left-right 18s linear infinite;
+        }
+        .walker-winter-scarf {
+            animation: walk-right-left 24s linear infinite;
+        }
+        .walker-bunny-sketch {
+            animation: hop-across 30s linear infinite;
+        }
+
+        /* Hand-drawn paper texture overlays */
+        .sketch-overlay {
+            mix-blend-mode: multiply;
+            opacity: 0.12;
+            pointer-events: none;
+        }
+
+        /* Highlight selected card */
+        .item-selected {
+            border-color: #b45309 !important;
+            background-color: #fef3c7 !important;
+            transform: scale(1.04);
+            box-shadow: 4px 6px 0px 0px #4a3e3d !important;
+        }
+
+        /* Vinyl rotating animation for jukebox */
+        @keyframes spin-vinyl {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .spinning-vinyl {
+            animation: spin-vinyl 4s linear infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-start overflow-x-hidden relative p-3">
+
+    <div id="flower-container" class="absolute inset-0 overflow-hidden pointer-events-none z-10"></div>
+
+    <!-- MAIN APP CONTAINER -->
+    <main class="w-full max-w-4xl bg-[#fffdfa] sketch-border min-h-[88vh] p-4 md:p-6 flex flex-col justify-between relative z-20">
+        
+        <!-- HEADER SECTION -->
+        <header class="flex justify-between items-center pb-4 border-b-2 border-dashed border-[#cdbfb0] mb-4">
+            <div class="flex items-center space-x-2 cursor-pointer" onclick="goToScreen('exterior')">
+                <span class="text-3xl filter drop-shadow">🐰☕</span>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-black text-[#5c4a3c] tracking-tight">cozy miffy cafe study</h1>
+                    <p class="text-xs text-[#a5917e] font-semibold">มุมจดจ่ออ่านหนังสือแสนอบอุ่นใจสไตล์น้องกระต่ายมิมิ</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-2">
+                <!-- Music Control Panel Toggle -->
+                <button onclick="toggleJukeboxPanel()" class="sketch-button bg-[#fff2e8] px-3 py-1.5 text-xs font-bold flex items-center gap-1.5 text-amber-900">
+                    <i class="fa-solid fa-compact-disc animate-spin"></i>
+                    <span>ตู้เพลงสเก็ตช์</span>
+                </button>
+                <button onclick="toggleAmbientRain()" id="sound-toggle-btn" class="sketch-button px-3 py-1.5 text-xs font-bold flex items-center gap-1.5 text-[#5c4a3c] bg-white">
+                    <i id="sound-icon" class="fa-solid fa-volume-xmark"></i>
+                    <span id="sound-text" class="hidden sm:inline">เสียงฝนตก</span>
+                </button>
+                <button onclick="openTrophyCabin()" class="sketch-button bg-[#fffbeb] px-3.5 py-1.5 flex items-center space-x-1.5 text-[#5c4a3c] hover:bg-[#fff9db] font-bold text-sm">
+                    <i class="fa-solid fa-trophy text-amber-500"></i>
+                    <span>ตู้รางวัล (<span id="trophy-badge-count">0</span>)</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- ======================================================= -->
+        <!-- SCREEN 1: EXTERIOR VIEW (หน้าร้านคาเฟ่สไตล์ลายเส้นดินสอ) -->
+        <!-- ======================================================= -->
+        <section id="screen-exterior" class="flex-1 flex flex-col items-center justify-center py-4 text-center transition-all duration-300">
+            <div class="relative w-full max-w-md mx-auto my-3 sketch-border bg-white overflow-hidden p-2 shadow-lg">
+                <!-- Dynamic secure image loading -->
+                <img data-asset="exterior" alt="Cozy Miffy Cafe Exterior" class="w-full h-auto object-cover rounded-lg" onerror="showFallbackImage(this, '🏬', 'Cozy Miffy Cafe');">
+                
+                <!-- Hanging Open Sign Overlay with swing animation -->
+                <div class="absolute top-[52%] left-[46%] transform -translate-x-1/2 swinging-sign z-10 cursor-pointer" onclick="goToScreen('menu')">
+                    <div class="bg-[#fff9e6] text-[#4a3e3d] border-2 border-[#4a3e3d] text-[10px] md:text-xs font-black px-3.5 py-1 rounded shadow-md flex flex-col items-center justify-center">
+                        <div class="w-1.5 h-3 bg-[#4a3e3d] -mt-4 mb-0.5"></div>
+                        <span class="tracking-widest">✿ OPEN ✿</span>
+                    </div>
+                </div>
+
+                <!-- Cute Stamp badge -->
+                <div class="absolute bottom-3 right-4 w-12 h-12 bg-white rounded-full border-2 border-[#4a3e3d] p-1 shadow">
+                    <img data-asset="walkerSketch" alt="Miffy Stamp" class="w-full h-full object-contain rounded-full" onerror="showFallbackImage(this, '🐰', 'Bunny');">
+                </div>
+            </div>
+
+            <!-- Interactivity Area -->
+            <div class="mt-4 max-w-lg px-2">
+                <p class="text-sm md:text-base text-[#615143] leading-relaxed mb-5 font-semibold">
+                    ยินดีต้อนรับสู่ <span class="border-b-2 border-dashed border-[#bda691] font-bold text-[#8c6b4f]">cozy miffy cafe study</span> ร้านคาเฟ่ลายเส้นดินสอสุดอบอุ่นใจ 
+                    ที่ที่มีกลิ่นอายความรู้และดอกไม้หวานที่ผลิบานตกแต่งอยู่รอบร้าน...
+                </p>
+                
+                <div class="bg-[#fdfaf3] border-2 border-dashed border-[#d2c2b0] rounded-xl p-3 mb-5">
+                    <p class="text-xs md:text-sm text-[#7e6955] font-bold">🚪 ประตูร้านมีป้าย OPEN แขวนห้อย และตกแต่งด้วยดอกไม้ผลิบานรอบคาเฟ่</p>
+                </div>
+
+                <button onclick="goToScreen('menu')" class="sketch-button bg-[#eedcb5] hover:bg-[#e4cea2] text-[#4a3e3d] font-black text-base md:text-lg px-8 py-3.5 w-full sm:w-auto">
+                    🚪 ลองเข้าไปในร้านไหม? คลิกเพื่อเปิดประตูเลยจ้า
+                </button>
+            </div>
+        </section>
+
+        <!-- ======================================================= -->
+        <!-- SCREEN 2: MENU SELECTION (เลือกเมนูของว่างและเครื่องดื่มบนโต๊ะสเก็ตช์) -->
+        <!-- ======================================================= -->
+        <section id="screen-menu" class="hidden flex-1 flex flex-col justify-between py-2 transition-all duration-300">
+            <div class="text-center mb-4">
+                <h2 class="text-xl md:text-2xl font-black text-[#5c4a3c] mb-1">🍵 เลือกเมนูโปรดของคุณวันนี้</h2>
+                <p class="text-xs text-[#8c7764]">คลิกเลือกของว่างหรือเครื่องดื่มที่จะวางเป็นเพื่อนร่วมโต๊ะกับคุณบนโต๊ะสเก็ตช์ดินสอ</p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4 px-1 md:px-4 max-h-[50vh] overflow-y-auto custom-scroll py-2">
+                
+                <!-- Menu: Matcha Latte -->
+                <div onclick="clickMenuItem('matcha')" id="card-matcha" class="menu-item-card bg-white border-2 border-[#4a3e3d] rounded-2xl p-2.5 cursor-pointer transition-all hover:scale-105 flex flex-col items-center justify-between text-center shadow-md">
+                    <div class="w-20 h-20 md:w-24 md:h-24 overflow-hidden rounded-xl border border-[#ece4d5] flex items-center justify-center bg-white relative">
+                        <img data-asset="matcha" class="object-contain max-h-full max-w-full" alt="Iced Matcha Latte" onerror="showFallbackImage(this, '🍵', 'Matcha');">
+                    </div>
+                    <span class="text-xs font-black mt-2 text-[#4a3e3d]">มัทฉะนมสดเย็น</span>
+                    <span class="text-[9px] text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full font-bold mt-1">ใบชามัทฉะแท้</span>
+                </div>
+
+                <!-- Menu: Hot Cocoa -->
+                <div onclick="clickMenuItem('cocoa')" id="card-cocoa" class="menu-item-card bg-white border-2 border-[#4a3e3d] rounded-2xl p-2.5 cursor-pointer transition-all hover:scale-105 flex flex-col items-center justify-between text-center shadow-md">
+                    <div class="w-20 h-20 md:w-24 md:h-24 overflow-hidden rounded-xl border border-[#ece4d5] flex items-center justify-center bg-white relative">
+                        <img data-asset="cocoa" class="object-contain max-h-full max-w-full" alt="Hot Cocoa" onerror="showFallbackImage(this, '🍫', 'Hot Cocoa');">
+                    </div>
+                    <span class="text-xs font-black mt-2 text-[#4a3e3d]">โกโก้วิปครีมร้อน</span>
+                    <span class="text-[9px] text-amber-800 bg-amber-50 px-2 py-0.5 rounded-full font-bold mt-1">วิปครีมนุ่มละมุน</span>
+                </div>
+
+                <!-- Menu: Cookies -->
+                <div onclick="clickMenuItem('cookie')" id="card-cookie" class="menu-item-card bg-white border-2 border-[#4a3e3d] rounded-2xl p-2.5 cursor-pointer transition-all hover:scale-105 flex flex-col items-center justify-between text-center shadow-md">
+                    <div class="w-20 h-20 md:w-24 md:h-24 overflow-hidden rounded-xl border border-[#ece4d5] flex items-center justify-center bg-white relative">
+                        <img data-asset="cookie" class="object-contain max-h-full max-w-full" alt="Cookies" onerror="showFallbackImage(this, '🍪', 'Cookie');">
+                    </div>
+                    <span class="text-xs font-black mt-2 text-[#4a3e3d]">คุกกี้ช็อกชิป</span>
+                    <span class="text-[9px] text-amber-800 bg-amber-50 px-2 py-0.5 rounded-full font-bold mt-1">ช็อกชิปกรุบกรอบ</span>
+                </div>
+
+                <!-- Menu: Chocolate Milk Box -->
+                <div onclick="clickMenuItem('milk-box')" id="card-milk-box" class="menu-item-card bg-white border-2 border-[#4a3e3d] rounded-2xl p-2.5 cursor-pointer transition-all hover:scale-105 flex flex-col items-center justify-between text-center shadow-md">
+                    <div class="w-20 h-20 md:w-24 md:h-24 overflow-hidden rounded-xl border border-[#ece4d5] flex items-center justify-center bg-white relative">
+                        <img data-asset="milkBox" class="object-contain max-h-full max-w-full" alt="Chocolate Milk Box" onerror="showFallbackImage(this, '🥛', 'Choco Milk');">
+                    </div>
+                    <span class="text-xs font-black mt-2 text-[#4a3e3d]">นมช็อกกล่อง</span>
+                    <span class="text-[9px] text-sky-800 bg-sky-50 px-2 py-0.5 rounded-full font-bold mt-1">รสหวานชื่นใจ</span>
+                </div>
+
+                <!-- Menu: Yakult -->
+                <div onclick="clickMenuItem('yakult')" id="card-yakult" class="menu-item-card bg-white border-2 border-[#4a3e3d] rounded-2xl p-2.5 cursor-pointer transition-all hover:scale-105 flex flex-col items-center justify-between text-center shadow-md">
+                    <div class="w-20 h-20 md:w-24 md:h-24 overflow-hidden rounded-xl border border-[#ece4d5] flex items-center justify-center bg-white relative">
+                        <img data-asset="yakult" class="object-contain max-h-full max-w-full animate-pulse" alt="Yakult" onerror="showFallbackImage(this, '🍼', 'Yakult');">
+                    </div>
+                    <span class="text-xs font-black mt-2 text-[#4a3e3d]">ยาคูลท์สดชื่น</span>
+                    <span class="text-[9px] text-red-800 bg-red-50 px-2 py-0.5 rounded-full font-bold mt-1">เปรี้ยวหวานลงตัว</span>
+                </div>
+
+                <!-- Menu: Warm Milk -->
+                <div onclick="clickMenuItem('warm-milk')" id="card-warm-milk" class="menu-item-card bg-white border-2 border-[#4a3e3d] rounded-2xl p-2.5 cursor-pointer transition-all hover:scale-105 flex flex-col items-center justify-between text-center shadow-md">
+                    <div class="w-20 h-20 md:w-24 md:h-24 overflow-hidden rounded-xl border border-[#ece4d5] flex items-center justify-center bg-white relative">
+                        <img data-asset="warmMilk" class="object-contain max-h-full max-w-full" alt="Warm Milk" onerror="showFallbackImage(this, '🍶', 'Warm Milk');">
+                    </div>
+                    <span class="text-xs font-black mt-2 text-[#4a3e3d]">นมอุ่น</span>
+                    <span class="text-[9px] text-stone-800 bg-stone-100 px-2 py-0.5 rounded-full font-bold mt-1">อุ่นใจนอนหลับสบาย</span>
+                </div>
+
+                <!-- Menu: Chocolate Strawberry Cake -->
+                <div onclick="clickMenuItem('cake')" id="card-cake" class="menu-item-card bg-white border-2 border-[#4a3e3d] rounded-2xl p-2.5 cursor-pointer transition-all hover:scale-105 flex flex-col items-center justify-between text-center shadow-md">
+                    <div class="w-20 h-20 md:w-24 md:h-24 overflow-hidden rounded-xl border border-[#ece4d5] flex items-center justify-center bg-white relative">
+                        <img data-asset="cake" class="object-contain max-h-full max-w-full" alt="Chocolate Strawberry Cake" onerror="showFallbackImage(this, '🍰', 'Strawberry Cake');">
+                    </div>
+                    <span class="text-xs font-black mt-2 text-[#4a3e3d]">เค้กช็อกสตรอว์เบอร์รี</span>
+                    <span class="text-[9px] text-rose-800 bg-rose-50 px-2 py-0.5 rounded-full font-bold mt-1">เค้กเนื้อฟูนุ่ม</span>
+                </div>
+
+                <!-- Cozy empty seat block -->
+                <div class="border-2 border-dashed border-[#bda893] rounded-2xl p-2.5 flex flex-col items-center justify-center text-center bg-[#fdfdfc]">
+                    <span class="text-2xl">🛋️</span>
+                    <span class="text-xs font-bold text-[#8c7a68] mt-1">โต๊ะสเก็ตช์ตัวโปรด</span>
+                    <p class="text-[9px] text-[#ac9c8e] mt-0.5">พนักงานเตรียมพื้นที่แสนสบายไว้ให้แล้ว</p>
+                </div>
+
+            </div>
+
+            <div class="mt-4 text-center border-t border-dashed border-[#ecdac5] pt-3">
+                <p class="text-sm font-semibold text-[#5c4a3c] mb-3">
+                    🥛 เมนูที่คุณต้องการนำไปนั่งโต๊ะ: 
+                    <span id="selected-menu-text" class="font-black text-[#b45309] bg-[#fffbeb] px-3.5 py-1 rounded-full border border-amber-300">
+                        มัทฉะนมสดเย็น
+                    </span>
+                </p>
+
+                <div class="flex justify-center space-x-3">
+                    <button onclick="goToScreen('exterior')" class="sketch-button bg-stone-100 hover:bg-stone-200 text-stone-700 px-5 py-2.5 text-xs font-bold">
+                        ↩️ ย้อนกลับหน้าร้าน
+                    </button>
+                    <button onclick="confirmSeatAndGo()" class="sketch-button bg-[#d6ccb6] hover:bg-[#c9bea7] text-[#4a3e3d] font-black px-8 py-2.5 text-sm">
+                        🪑 เข้าไปหาที่นั่งกันเลยไหม?
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================= -->
+        <!-- SCREEN 3: STUDY ROOM & FOCUS TIMER (โต๊ะทำงาน และหน้าต่างลายเส้นดินสอ) -->
+        <!-- ======================================================= -->
+        <section id="screen-study" class="hidden flex-1 flex flex-col lg:flex-row gap-5 py-1 transition-all duration-300">
+            
+            <!-- Left Side: Interactive Sketch Room & Changing Sunset/Moonrise Window View -->
+            <div class="flex-1 flex flex-col justify-between">
+                
+                <div class="relative sketch-border bg-white overflow-hidden p-2.5 shadow-inner h-[320px] md:h-[360px] flex flex-col justify-between">
+                    
+                    <!-- Dynamic Sky View Mirror (เปลี่ยนตามเวลาจริงและเป็นลายเส้นวาด) -->
+                    <div class="absolute inset-0 z-0 overflow-hidden rounded-xl">
+                        
+                        <!-- 100% Real-time Handdrawn Styled Sceneries (City View background) -->
+                        <div id="scenery-daylight" class="absolute inset-0 scenery-view opacity-100 flex items-center justify-center" data-bg="dayView">
+                            <!-- Overlay filter to bring sketch line detail -->
+                            <div class="absolute inset-0 bg-amber-500/10 mix-blend-color-burn"></div>
+                        </div>
+                        <div id="scenery-nightfall" class="absolute inset-0 scenery-view opacity-0 flex items-center justify-center" data-bg="nightView">
+                            <!-- Dark indigo filter overlay -->
+                            <div class="absolute inset-0 bg-blue-950/20 mix-blend-overlay"></div>
+                        </div>
+                        
+                        <!-- Celestial Orbits (Sun & Moon orbiting) -->
+                        <div class="absolute inset-0 pointer-events-none z-10">
+                            <!-- Sun Element (Sunset sketch styled) -->
+                            <div id="sky-sun-element" class="absolute left-1/4 top-1/4 text-5xl sketchy-sun-orbit select-none filter drop-shadow-md">
+                                ☀️
+                            </div>
+                            <!-- Moon Element (Moonrise sketch styled) -->
+                            <div id="sky-moon-element" class="absolute left-1/4 top-1/4 text-4xl sketchy-moon-orbit select-none filter drop-shadow-md hidden">
+                                🌙
+                            </div>
+                        </div>
+
+                        <!-- Busy Sketchy Bunnies walking outside in the city -->
+                        <!-- 1. Miffy Classic blue shirt -->
+                        <div class="absolute bottom-2 w-10 h-10 z-20 walker-classic-blue select-none">
+                            <img data-asset="walkerClassic" alt="Miffy Blue" class="w-full h-full object-contain bg-white/90 p-0.5 rounded-full border border-[#4a3e3d]" onerror="showFallbackImage(this, '🐰', 'Blue');">
+                        </div>
+                        <!-- 2. Miffy Winter Scarf -->
+                        <div class="absolute bottom-2 w-10 h-10 z-20 walker-winter-scarf select-none">
+                            <img data-asset="walkerWinter" alt="Miffy Winter" class="w-full h-full object-contain bg-white/90 p-0.5 rounded-full border border-[#4a3e3d]" onerror="showFallbackImage(this, '🐰', 'Winter');">
+                        </div>
+                        <!-- 3. Miffy Sketch outline baby hopping -->
+                        <div class="absolute bottom-3 w-9 h-9 z-20 walker-bunny-sketch select-none">
+                            <img data-asset="walkerSketch" alt="Miffy Sketch" class="w-full h-full object-contain bg-white/95 p-0.5 rounded-full border border-[#4a3e3d]" onerror="showFallbackImage(this, '🐰', 'Sketch');">
+                        </div>
+
+                        <!-- Paper texture overlay blend -->
+                        <div class="absolute inset-0 bg-[#fffef4] sketch-overlay"></div>
+                    </div>
+
+                    <!-- Inner Room Sketch Architectural base overlay -->
+                    <div class="absolute inset-0 z-10 opacity-20 pointer-events-none">
+                        <img data-asset="sketchBase" class="w-full h-full object-cover" alt="Architectural Sketch" onerror="showFallbackImage(this, '🛋️', 'Interior');">
+                    </div>
+
+                    <!-- REAL-TIME PANEL HUD & TABLES -->
+                    <div class="relative z-30 w-full h-full flex flex-col justify-between p-1">
+                        
+                        <!-- Time Tracker -->
+                        <div class="flex justify-between items-start">
+                            <div class="bg-white/95 border-2 border-[#4a3e3d] px-3 py-1.5 rounded-xl text-xs shadow-sm font-bold flex items-center gap-1.5">
+                                <span class="animate-pulse text-amber-600">●</span>
+                                <span>วิวนอกกระจก: <strong id="clock-realtime-text">00:00:00</strong></span>
+                                <span class="mx-1 text-[#ccc]">|</span>
+                                <span id="sky-description" class="text-amber-800">ช่วงเวลาอุ่นๆ</span>
+                            </div>
+                        </div>
+
+                        <!-- 3 Tables with Miffy Characters! -->
+                        <div class="grid grid-cols-3 gap-2 mt-auto pb-0.5">
+                            
+                            <!-- Table 1: Miffy sitting with headphones reading -->
+                            <div class="bg-white/95 border-2 border-dashed border-[#4a3e3d] p-1.5 rounded-xl flex flex-col items-center justify-end text-center relative h-32 md:h-38 shadow-sm">
+                                <span class="absolute top-1 left-1 text-[8px] bg-blue-50 text-blue-800 font-bold px-1.5 py-0.5 rounded-full">คุณใบชา</span>
+                                <img data-asset="miffyHeadphones" class="h-16 md:h-22 object-contain rounded-lg mb-1" alt="Miffy with Headphones" onerror="showFallbackImage(this, '🎧', 'Read');">
+                                <div class="w-full h-1 bg-[#4a3e3d] rounded"></div>
+                                <span class="text-[8px] text-gray-500 font-bold mt-1">ฟังเพลงจดจ่อเงียบๆ</span>
+                            </div>
+
+                            <!-- Table 2: User's Table with Selected Drink (from หน้าสอง) -->
+                            <div class="bg-[#fffdf2] border-2 border-[#b45309] p-1.5 rounded-xl flex flex-col items-center justify-end text-center relative h-32 md:h-38 shadow-md">
+                                <span class="absolute top-1 right-1 text-[8px] bg-[#fef3c7] text-[#b45309] font-black px-1.5 py-0.5 rounded-full">โต๊ะของคุณ</span>
+                                
+                                <!-- Dynamic Selected Menu Image Container -->
+                                <div id="my-desk-item-container" class="w-12 h-12 md:w-16 md:h-16 flex items-center justify-center mb-1">
+                                    <img id="my-desk-item-image" class="object-contain max-h-full max-w-full rounded" alt="My Selected Snack">
+                                </div>
+                                <div class="w-full h-1.5 bg-[#b45309] rounded"></div>
+                                <span id="my-desk-item-label" class="text-[8px] font-bold text-[#78350f] mt-1">มัทฉะนมสดเย็น</span>
+                            </div>
+
+                            <!-- Table 3: Miffy writing / studying -->
+                            <div class="bg-white/95 border-2 border-dashed border-[#4a3e3d] p-1.5 rounded-xl flex flex-col items-center justify-end text-center relative h-32 md:h-38 shadow-sm">
+                                <span class="absolute top-1 right-1 text-[8px] bg-red-50 text-red-800 font-bold px-1.5 py-0.5 rounded-full">คุณส้มจี๊ด</span>
+                                <img data-asset="miffyWriting" class="h-16 md:h-22 object-contain rounded-lg mb-1" alt="Miffy Writing" onerror="showFallbackImage(this, '✍️', 'Write');">
+                                <div class="w-full h-1 bg-[#4a3e3d] rounded"></div>
+                                <span class="text-[8px] text-gray-500 font-bold mt-1">เขียนจดหมายสรุปวิชา</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Guidance Note -->
+                <div class="mt-3 bg-stone-50 p-3 rounded-xl border border-dashed border-[#cdbeb0]">
+                    <p class="text-xs text-[#736151] leading-relaxed">
+                        🌟 <strong>กติกาถ้วยสะสมเกียรติยศกระต่าย:</strong> เมื่อเลือกเวลาจดจ่อ (25 นาที / 30 นาที) และเริ่มอ่านหนังสือจนสำเร็จ หรือสะสมเวลา "จับเวลาต่อเนื่อง" ครบ 1 ชั่วโมง คุณจะได้รับรางวัล <strong>ถ้วยรางวัลสเก็ตช์กระต่ายเกียรติยศ 🏆</strong> ไปตั้งประดับสะสมตู้โชว์ส่วนตัวของคุณ!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right Side: Focus Timer Control Panel & Jukebox Player -->
+            <div class="w-full lg:w-[320px] flex flex-col justify-between gap-3">
+                
+                <!-- TIMER SYSTEM -->
+                <div class="sketch-border p-4 bg-[#fcfaf3] flex flex-col justify-between">
+                    <div class="space-y-1.5 mb-3">
+                        <label class="text-xs font-black text-[#5c4a3c] uppercase tracking-wider block">⏱️ เลือกเป้าหมายสมาธิ</label>
+                        <div class="grid grid-cols-3 gap-1.5">
+                            <button onclick="changeTimerTarget('25')" id="preset-btn-25" class="preset-tab-btn sketch-button py-2 px-1 text-xs font-bold bg-[#fff9db]">
+                                25 นาที<br><span class="text-[9px] font-normal text-gray-500">(พัก 5 นาที)</span>
+                            </button>
+                            <button onclick="changeTimerTarget('30')" id="preset-btn-30" class="preset-tab-btn sketch-button py-2 px-1 text-xs font-bold bg-white">
+                                30 นาที<br><span class="text-[9px] font-normal text-gray-500">(พัก 5 นาที)</span>
+                            </button>
+                            <button onclick="changeTimerTarget('free')" id="preset-btn-free" class="preset-tab-btn sketch-button py-2 px-1 text-xs font-bold bg-white">
+                                จับเวลาต่อเนื่อง<br><span class="text-[9px] font-normal text-gray-500">(1 ชม. +)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Central Clock UI -->
+                    <div class="bg-white sketch-border p-4 text-center my-1.5 flex flex-col justify-center items-center relative">
+                        <div id="timer-status-badge" class="text-[10px] font-black text-[#b45309] bg-[#fffbf0] px-3.5 py-1 rounded-full mb-2">
+                            📖 พร้อมสำหรับการเริ่มอ่านแล้ว
+                        </div>
+
+                        <span id="timer-number-digits" class="text-4xl font-black text-[#4a3e3d] tracking-widest block my-1.5 select-none font-mono">
+                            25:00
+                        </span>
+
+                        <div class="w-full bg-stone-100 h-2 rounded-full overflow-hidden mt-1 border border-[#ccc]">
+                            <div id="timer-progress-microbar" class="bg-[#b45309] h-full transition-all duration-1000" style="width: 100%"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 pt-1">
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="triggerTimerStart()" id="btn-timer-trigger" class="sketch-button bg-[#65a30d] hover:bg-[#548a0a] text-white py-2.5 px-3 font-black text-sm flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-play"></i> เริ่มอ่านหนังสือ
+                            </button>
+                            <button onclick="triggerTimerPause()" id="btn-timer-pause" class="sketch-button bg-[#ea580c] hover:bg-[#d04e0a] text-white py-2.5 px-3 font-black text-sm flex items-center justify-center gap-2" disabled>
+                                <i class="fa-solid fa-pause"></i> พักสายตา
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="triggerTimerReset()" id="btn-timer-reset" class="sketch-button bg-stone-100 hover:bg-stone-200 text-stone-700 py-1.5 px-2 text-xs font-bold">
+                                🔄 รีเซ็ตเวลา
+                            </button>
+                            <button onclick="goToScreen('menu')" class="sketch-button bg-[#fffbef] hover:bg-[#fff9db] text-amber-900 py-1.5 px-2 text-xs font-bold">
+                                📋 เปลี่ยนเมนูใหม่
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INTEGRATED RETRO JUKEBOX PANEL (ตู้เพลงสเก็ตช์ดินสอโบราณ) -->
+                <div class="sketch-border p-4 bg-[#fffcf5] flex flex-col">
+                    <div class="flex items-center justify-between border-b border-[#ebd9c5] pb-1.5 mb-2">
+                        <span class="text-xs font-black text-amber-900 uppercase flex items-center gap-1">
+                            <i class="fa-solid fa-compact-disc text-amber-700 animate-spin"></i> ตู้เพลงคาเฟ่มิฟฟี่
+                        </span>
+                        <span class="text-[9px] text-[#8c7764] font-bold">Search YouTube Music</span>
+                    </div>
+
+                    <!-- YouTube Search Area -->
+                    <div class="space-y-1.5 mb-2">
+                        <div class="flex gap-1">
+                            <input type="text" id="jukebox-search-input" placeholder="ค้นหาเพลง / วางลิงก์ YouTube..." class="w-full bg-white border border-[#4a3e3d] rounded-lg px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500 font-medium">
+                            <button onclick="searchAndPlayTrack()" class="sketch-button bg-amber-100 hover:bg-amber-200 text-amber-900 px-2.5 py-1 text-xs font-bold">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Curated Music shortcuts -->
+                    <div class="grid grid-cols-2 gap-1 mb-2">
+                        <button onclick="loadYoutubeVideo('5qap5aO4i9A', 'Lofi Cafe Miffy')" class="text-[10px] text-left px-2 py-1 bg-white border border-stone-200 rounded-lg truncate hover:border-amber-500 font-semibold">
+                            🎧 Cozy Cafe Lofi
+                        </button>
+                        <button onclick="loadYoutubeVideo('8X8_K3_wDww', 'Studio Ghibli Piano')" class="text-[10px] text-left px-2 py-1 bg-white border border-stone-200 rounded-lg truncate hover:border-amber-500 font-semibold">
+                            🎹 Ghibli Piano
+                        </button>
+                        <button onclick="loadYoutubeVideo('Y-7gK9_kCHY', 'Rain & Piano Music')" class="text-[10px] text-left px-2 py-1 bg-white border border-stone-200 rounded-lg truncate hover:border-amber-500 font-semibold">
+                            🌧️ Piano & Rain
+                        </button>
+                        <button onclick="loadYoutubeVideo('tnkpUv8_lD8', 'Chill Animal Crossing')" class="text-[10px] text-left px-2 py-1 bg-white border border-stone-200 rounded-lg truncate hover:border-amber-500 font-semibold">
+                            🍃 Animal Crossing
+                        </button>
+                    </div>
+
+                    <!-- Playing Status Visualizer -->
+                    <div class="bg-stone-50 border border-dashed border-[#cdbea0] rounded-xl p-2 flex items-center gap-3">
+                        <div class="w-10 h-10 bg-stone-900 rounded-full flex items-center justify-center spinning-vinyl shadow-md relative shrink-0">
+                            <div class="w-3.5 h-3.5 bg-yellow-100 rounded-full border border-stone-800"></div>
+                        </div>
+                        <div class="min-w-0 flex-1">
+                            <p class="text-[10px] font-bold text-gray-500 uppercase tracking-tight">กำลังเล่นเพลง</p>
+                            <p id="jukebox-current-track-title" class="text-xs font-black text-amber-900 truncate">Lofi Cafe Miffy</p>
+                        </div>
+                    </div>
+
+                    <!-- Hidden Sandbox YouTube Player -->
+                    <div class="mt-2 rounded-lg overflow-hidden border border-[#4a3e3d] h-[75px] bg-black">
+                        <iframe id="youtube-jukebox-iframe" class="w-full h-full" src="https://www.youtube.com/embed/5qap5aO4i9A?enablejsapi=1&autoplay=0&controls=1" title="Cozy Miffy Jukebox" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- FOOTER BRANDING -->
+        <footer class="mt-5 pt-3 border-t border-dashed border-[#cdbfb0] text-center text-xs text-[#a5917e] font-bold flex flex-col sm:flex-row justify-between items-center gap-2">
+            <span>cozy miffy cafe study © 2026. ออกแบบด้วยความอบอุ่นใจสไตล์คุณกระต่าย</span>
+            <div class="flex space-x-2.5">
+                <a href="#" onclick="goToScreen('exterior')" class="hover:text-[#5c4a3c]">🏬 กลับหน้าร้าน</a>
+                <span>|</span>
+                <a href="#" onclick="openTrophyCabin()" class="hover:text-[#5c4a3c]">🏆 เปิดตู้โชว์เกียรติยศ</a>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- ======================================================= -->
+    <!-- TROPHY DISPLAY CABIN MODAL (ตู้รางวัลใบแรกสุดแสนคลาสสิก) -->
+    <!-- ======================================================= -->
+    <div id="trophy-cabin-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
+        <div class="bg-[#fefbf4] sketch-border w-full max-w-md p-5 max-h-[88vh] flex flex-col justify-between shadow-2xl relative">
+            
+            <button onclick="closeTrophyCabin()" class="absolute top-4 right-4 text-2xl text-[#5c4a3c] hover:scale-110 transition-transform select-none z-10">
+                ✖️
+            </button>
+
+            <!-- Cabin Header -->
+            <div class="text-center pb-2.5 border-b-2 border-dashed border-[#d2c2b0]">
+                <div class="flex justify-center items-center space-x-2">
+                    <span class="text-3xl">🐰🏆</span>
+                </div>
+                <h3 class="text-xl font-black text-[#5c4a3c] mt-1.5">ตู้สะสมถ้วยเกียรติยศกระต่ายแสนอบอุ่น</h3>
+                <p class="text-[11px] text-[#9c8976]">ชั้นจัดแสดงเหรียญรางวัลความอุตสาหะและการตั้งใจอ่านหนังสือ</p>
+            </div>
+
+            <div class="flex-1 my-3 overflow-y-auto custom-scroll pr-1.5">
+                <div class="bg-[#eedeb7] border-4 border-[#4a3e3d] rounded-2xl p-3.5 shadow-inner space-y-3.5">
+                    
+                    <!-- Shelf Level 1: Core Trophies (Classic Style) -->
+                    <div>
+                        <span class="text-[10px] uppercase font-bold text-[#82715e] tracking-wider block mb-1.5">🏆 ถ้วยรางวัลเกียรติยศลายเส้นคุณกระต่าย (Classic Style)</span>
+                        <div class="grid grid-cols-3 gap-2">
+                            <!-- 25 Mins Bronze Bunny Trophy -->
+                            <div class="bg-white/95 border-2 border-dashed border-[#4a3e3d] p-2 rounded-xl flex flex-col items-center justify-center text-center relative" id="trophy-card-25">
+                                <div class="relative w-14 h-14 mb-1 flex items-center justify-center">
+                                    <svg id="trophy-svg-25" class="w-12 h-12 filter grayscale opacity-25 transition-all duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 20C12 12 18 12 18 20V24C18 24 12 24 12 20Z" stroke="#4a3e3d" stroke-width="3" fill="#cd7f32" stroke-linejoin="round"/>
+                                        <path d="M52 20C52 12 46 12 46 20V24C46 24 52 24 52 20Z" stroke="#4a3e3d" stroke-width="3" fill="#cd7f32" stroke-linejoin="round"/>
+                                        <path d="M16 8C16 2 24 2 24 8V16H16V8Z" stroke="#4a3e3d" stroke-width="2" fill="#fff" stroke-linejoin="round"/>
+                                        <path d="M48 8C48 2 40 2 40 8V16H48V8Z" stroke="#4a3e3d" stroke-width="2" fill="#fff" stroke-linejoin="round"/>
+                                        <path d="M18 16H46V36C46 44 38 48 32 48C26 48 18 44 18 36V16Z" stroke="#4a3e3d" stroke-width="3.5" fill="#e5bfa1" stroke-linejoin="round"/>
+                                        <circle cx="32" cy="28" r="4" fill="#a55c27" stroke="#4a3e3d" stroke-width="1.5"/>
+                                        <path d="M24 56H40V60H24V56Z" stroke="#4a3e3d" stroke-width="3" fill="#8c7764"/>
+                                        <path d="M32 48V56" stroke="#4a3e3d" stroke-width="3"/>
+                                    </svg>
+                                    <span class="absolute bottom-0 right-0 bg-[#cd7f32] text-white text-[8px] font-bold px-1 rounded">25m</span>
+                                </div>
+                                <span class="text-[9px] font-black text-[#4a3e3d]">ถ้วยกระต่ายทองแดง</span>
+                                <span class="text-[8px] text-gray-500" id="trophy-status-25">ยังไม่ได้รับ</span>
+                            </div>
+
+                            <!-- 30 Mins Silver Bunny Trophy -->
+                            <div class="bg-white/95 border-2 border-dashed border-[#4a3e3d] p-2 rounded-xl flex flex-col items-center justify-center text-center relative" id="trophy-card-30">
+                                <div class="relative w-14 h-14 mb-1 flex items-center justify-center">
+                                    <svg id="trophy-svg-30" class="w-12 h-12 filter grayscale opacity-25 transition-all duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 20C12 12 18 12 18 20V24C18 24 12 24 12 20Z" stroke="#4a3e3d" stroke-width="3" fill="#c0c0c0" stroke-linejoin="round"/>
+                                        <path d="M52 20C52 12 46 12 46 20V24C46 24 52 24 52 20Z" stroke="#4a3e3d" stroke-width="3" fill="#c0c0c0" stroke-linejoin="round"/>
+                                        <path d="M16 8C16 2 24 2 24 8V16H16V8Z" stroke="#4a3e3d" stroke-width="2" fill="#fff" stroke-linejoin="round"/>
+                                        <path d="M48 8C48 2 40 2 40 8V16H48V8Z" stroke="#4a3e3d" stroke-width="2" fill="#fff" stroke-linejoin="round"/>
+                                        <path d="M18 16H46V36C46 44 38 48 32 48C26 48 18 44 18 36V16Z" stroke="#4a3e3d" stroke-width="3.5" fill="#e2e8f0" stroke-linejoin="round"/>
+                                        <circle cx="32" cy="28" r="4" fill="#94a3b8" stroke="#4a3e3d" stroke-width="1.5"/>
+                                        <path d="M24 56H40V60H24V56Z" stroke="#4a3e3d" stroke-width="3" fill="#8c7764"/>
+                                        <path d="M32 48V56" stroke="#4a3e3d" stroke-width="3"/>
+                                    </svg>
+                                    <span class="absolute bottom-0 right-0 bg-slate-500 text-white text-[8px] font-bold px-1 rounded">30m</span>
+                                </div>
+                                <span class="text-[9px] font-black text-[#4a3e3d]">ถ้วยกระต่ายเงิน</span>
+                                <span class="text-[8px] text-gray-500" id="trophy-status-30">ยังไม่ได้รับ</span>
+                            </div>
+
+                            <!-- 1 Hour Gold Bunny Trophy -->
+                            <div class="bg-white/95 border-2 border-dashed border-[#4a3e3d] p-2 rounded-xl flex flex-col items-center justify-center text-center relative" id="trophy-card-free">
+                                <div class="relative w-14 h-14 mb-1 flex items-center justify-center">
+                                    <svg id="trophy-svg-free" class="w-12 h-12 filter grayscale opacity-25 transition-all duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 20C12 12 18 12 18 20V24C18 24 12 24 12 20Z" stroke="#4a3e3d" stroke-width="3" fill="#fbbf24" stroke-linejoin="round"/>
+                                        <path d="M52 20C52 12 46 12 46 20V24C46 24 52 24 52 20Z" stroke="#4a3e3d" stroke-width="3" fill="#fbbf24" stroke-linejoin="round"/>
+                                        <path d="M16 8C16 2 24 2 24 8V16H16V8Z" stroke="#4a3e3d" stroke-width="2" fill="#fff" stroke-linejoin="round"/>
+                                        <path d="M48 8C48 2 40 2 40 8V16H48V8Z" stroke="#4a3e3d" stroke-width="2" fill="#fff" stroke-linejoin="round"/>
+                                        <path d="M18 16H46V36C46 44 38 48 32 48C26 48 18 44 18 36V16Z" stroke="#4a3e3d" stroke-width="3.5" fill="#fef3c7" stroke-linejoin="round"/>
+                                        <circle cx="32" cy="28" r="4" fill="#d97706" stroke="#4a3e3d" stroke-width="1.5"/>
+                                        <path d="M24 56H40V60H24V56Z" stroke="#4a3e3d" stroke-width="3" fill="#8c7764"/>
+                                        <path d="M32 48V56" stroke="#4a3e3d" stroke-width="3"/>
+                                    </svg>
+                                    <span class="absolute bottom-0 right-0 bg-yellow-500 text-white text-[8px] font-bold px-1 rounded">1h+</span>
+                                </div>
+                                <span class="text-[9px] font-black text-[#4a3e3d]">ถ้วยกระต่ายทองคำ</span>
+                                <span class="text-[8px] text-gray-500" id="trophy-status-free">ยังไม่ได้รับ</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shelf Level 2: Curated Beverage Stamps -->
+                    <div>
+                        <span class="text-[10px] uppercase font-bold text-[#82715e] tracking-wider block mb-1.5">🍵 ตราสะสมเครื่องดื่มและของว่าง (Menu Stamps)</span>
+                        <div class="grid grid-cols-4 gap-1.5">
+                            
+                            <div class="bg-white/90 border border-gray-300 p-1 rounded-xl flex flex-col items-center justify-center text-center opacity-30 transition-opacity" id="badge-menu-matcha">
+                                <span class="text-xl">🍵</span>
+                                <span class="text-[8px] font-bold text-[#4a3e3d] mt-0.5">มัทฉะเลิฟ</span>
+                            </div>
+
+                            <div class="bg-white/90 border border-gray-300 p-1 rounded-xl flex flex-col items-center justify-center text-center opacity-30 transition-opacity" id="badge-menu-cocoa">
+                                <span class="text-xl">🍫</span>
+                                <span class="text-[8px] font-bold text-[#4a3e3d] mt-0.5">ช็อกโก้เลิฟ</span>
+                            </div>
+
+                            <div class="bg-white/90 border border-gray-300 p-1 rounded-xl flex flex-col items-center justify-center text-center opacity-30 transition-opacity" id="badge-menu-cookie">
+                                <span class="text-xl">🍪</span>
+                                <span class="text-[8px] font-bold text-[#4a3e3d] mt-0.5">คุกกี้เลิฟ</span>
+                            </div>
+
+                            <div class="bg-white/90 border border-gray-300 p-1 rounded-xl flex flex-col items-center justify-center text-center opacity-30 transition-opacity" id="badge-menu-cake">
+                                <span class="text-xl">🍰</span>
+                                <span class="text-[8px] font-bold text-[#4a3e3d] mt-0.5">สตรอว์เค้ก</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Statistics Block -->
+                    <div class="bg-[#dccfaa] p-2.5 rounded-xl border border-[#a89975] text-[#5c4a3c] text-xs">
+                        <p class="font-bold mb-1">📝 สถิติการสะสมของคุณ:</p>
+                        <ul class="list-disc list-inside space-y-0.5 text-[10px] font-semibold">
+                            <li>ถ้วยรางวัลที่ปลดล็อกแล้ว: <span id="stats-badge-count" class="font-bold text-[#b45309]">0</span> ใบ</li>
+                            <li>เวลานั่งสมาธิอ่านหนังสือสะสม: <span id="stats-time-minutes" class="font-bold text-[#b45309]">0</span> นาที</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Modal Actions -->
+            <div class="flex space-x-2 pt-2 border-t border-dashed border-[#eedcb5]">
+                <button onclick="clearAllTrophiesData()" class="sketch-button bg-red-50 hover:bg-red-100 text-red-700 text-[10px] px-3 py-2">
+                    🧹 ล้างประวัติทั้งหมด
+                </button>
+                <button onclick="closeTrophyCabin()" class="flex-1 sketch-button bg-[#d6ccb6] hover:bg-[#c9bea7] text-[#4a3e3d] text-xs font-black py-2">
+                    ปิดตู้โชว์เกียรติยศ
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- NOTIFICATION TOAST -->
+    <div id="status-toast" class="fixed bottom-6 right-6 bg-[#fffbeb] border-3 border-amber-600 rounded-2xl p-4 shadow-2xl z-50 transform translate-y-28 opacity-0 transition-all duration-300 max-w-sm">
+        <div class="flex items-start space-x-3">
+            <span class="text-3xl">🏆</span>
+            <div>
+                <h4 class="font-black text-[#78350f] text-sm" id="toast-title-render">ยอดเยี่ยมเลยจ้า!</h4>
+                <p class="text-xs text-amber-800 mt-1" id="toast-desc-render">ยินดีด้วยคุณได้รับเหรียญรางวัลมิฟฟี่แล้ว</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CORE ENGINE JAVASCRIPT -->
+    <script>
+        // Secure asset path mappings
+        const ASSETS_CATALOG = {
+            exterior: 'download (2).jpg',
+            sketchBase: 'Elmsbrook Local Centre_ At the heart of the UK’s first true zero-carbon development - ADP Architecture.jpg',
+            dayView: 'City Background.jpg',
+            nightView: 'download (7).jpg',
+            
+            // Walkers Outside
+            walkerClassic: 'download.jpg',
+            walkerWinter: 'miffy sticker _33.jpg',
+            walkerSketch: 'Top 40 Nijntje Kleurplaat gratis voor kinderen 2025.jpg',
+            
+            // Study Co-helpers
+            miffyHeadphones: 'Miffy reading with headphones.jpg',
+            miffyWriting: 'download (1).jpg',
+            
+            // Menu Items Catalog
+            matcha: 'mactha.jpg',
+            cocoa: 'download (6).jpg',
+            cookie: 'download (5).jpg',
+            milkBox: 'download (4).jpg',
+            yakult: '𓂃⋆_˚.jpg',
+            warmMilk: 'download (3).jpg',
+            cake: 'follow me! #png˚ ༘♡ ·˚ chocolate cake.jpg'
+        };
+
+        // Secure URL escaping for local assets with spaces, unicode and hash characters
+        function getEscapedPath(fileName) {
+            if (!fileName) return '';
+            return encodeURI(fileName).replace(/#/g, '%23');
+        }
+
+        let currentActiveScreen = 'exterior';
+        let currentDrinkKey = 'matcha';
+        let currentDrinkName = 'มัทฉะนมสดเย็น';
+
+        // Timer engines
+        let focusTimerTargetMode = '25'; // '25', '30', 'free'
+        let isClockRunning = false;
+        let isRestBreakMode = false;
+        let clockSecondsLeft = 25 * 60; 
+        let clockTotalDuration = 25 * 60;
+        let freeModeElapsedSecs = 0;
+        let accumulatedStudySecs = parseInt(localStorage.getItem('miffy_total_accumulated_seconds_v3') || '0');
+        let clockIntervalId = null;
+
+        // Ambient rain synth
+        let ambientAudioCtx = null;
+        let noiseAudioBufferNode = null;
+        let noiseGainNode = null;
+        let isAmbientNoisePlaying = false;
+
+        // Achievements registers
+        let earnedTrophyList = JSON.parse(localStorage.getItem('miffy_earned_trophies_v3') || '[]');
+        let purchasedDrinkHistory = JSON.parse(localStorage.getItem('miffy_purchased_drinks_v3') || '[]');
+
+        // Detailed Catalog configuration
+        const catalogItems = {
+            'matcha': { name: 'มัทฉะนมสดเย็น', assetKey: 'matcha' },
+            'cocoa': { name: 'โกโก้วิปครีมร้อน', assetKey: 'cocoa' },
+            'cookie': { name: 'คุกกี้ช็อกชิป', assetKey: 'cookie' },
+            'milk-box': { name: 'นมช็อกกล่อง', assetKey: 'milkBox' },
+            'yakult': { name: 'ยาคูลท์สดชื่น', assetKey: 'yakult' },
+            'warm-milk': { name: 'นมอุ่น', assetKey: 'warmMilk' },
+            'cake': { name: 'เค้กช็อกสตรอว์เบอร์รี', assetKey: 'cake' }
+        };
+
+        window.onload = function() {
+            // Securely load all HTML images based on the catalog
+            document.querySelectorAll('[data-asset]').forEach(img => {
+                const assetKey = img.getAttribute('data-asset');
+                const path = ASSETS_CATALOG[assetKey];
+                if (path) {
+                    img.src = getEscapedPath(path);
+                }
+            });
+
+            // Securely load CSS backgrounds
+            document.querySelectorAll('[data-bg]').forEach(div => {
+                const bgKey = div.getAttribute('data-bg');
+                const path = ASSETS_CATALOG[bgKey];
+                if (path) {
+                    div.style.backgroundImage = `url('${getEscapedPath(path)}')`;
+                }
+            });
+
+            startFloatingFlowersEmitter();
+            refreshTrophyShelfRender();
+            triggerClockUpdateCycle();
+            
+            setInterval(triggerClockUpdateCycle, 1000); // Clock ticks every second
+            clickMenuItem('matcha'); // Select Matcha as default
+        };
+
+        // Fallback display if image fails to load
+        function showFallbackImage(imgElement, emoji, text) {
+            imgElement.style.display = 'none';
+            const parent = imgElement.parentElement;
+            if (parent && !parent.querySelector('.fallback-badge')) {
+                const badge = document.createElement('div');
+                badge.className = 'fallback-badge flex flex-col items-center justify-center h-full w-full';
+                badge.innerHTML = `<span class="text-3xl">${emoji}</span><span class="text-[9px] text-[#8c7764] mt-1 font-bold">${text}</span>`;
+                parent.appendChild(badge);
+            }
+        }
+
+        // Flower animation emitter
+        function startFloatingFlowersEmitter() {
+            const viewport = document.getElementById('flower-container');
+            const icons = ['🌸', '💮', '💮', '✿', '❀', '🏵️'];
+            
+            for (let i = 0; i < 14; i++) {
+                setTimeout(() => {
+                    const el = document.createElement('div');
+                    el.className = 'floating-flower';
+                    el.textContent = icons[Math.floor(Math.random() * icons.length)];
+                    el.style.left = Math.random() * 95 + 'vw';
+                    el.style.top = (Math.random() * 15 + 85) + 'vh';
+                    el.style.fontSize = (Math.random() * 12 + 10) + 'px';
+                    el.style.animationDuration = (Math.random() * 7 + 6) + 's';
+                    viewport.appendChild(el);
+
+                    el.addEventListener('animationiteration', () => {
+                        el.style.left = Math.random() * 95 + 'vw';
+                        el.style.animationDuration = (Math.random() * 7 + 6) + 's';
+                    });
+                }, i * 500);
+            }
+        }
+
+        // Screen switching controller
+        function goToScreen(targetName) {
+            document.getElementById('screen-exterior').classList.add('hidden');
+            document.getElementById('screen-menu').classList.add('hidden');
+            document.getElementById('screen-study').classList.add('hidden');
+
+            document.getElementById('screen-' + targetName).classList.remove('hidden');
+            currentActiveScreen = targetName;
+        }
+
+        // Menu item click listener
+        function clickMenuItem(key) {
+            currentDrinkKey = key;
+            currentDrinkName = catalogItems[key].name;
+
+            // Highlight chosen item card
+            document.querySelectorAll('.menu-item-card').forEach(card => {
+                card.classList.remove('item-selected');
+            });
+
+            const element = document.getElementById('card-' + key);
+            if (element) {
+                element.classList.add('item-selected');
+            }
+
+            document.getElementById('selected-menu-text').textContent = currentDrinkName;
+        }
+
+        // Confirm drink and go inside to search for desk
+        function confirmSeatAndGo() {
+            const tableImg = document.getElementById('my-desk-item-image');
+            const tableLabel = document.getElementById('my-desk-item-label');
+
+            const itemConfig = catalogItems[currentDrinkKey];
+            const originalPath = ASSETS_CATALOG[itemConfig.assetKey];
+
+            tableImg.src = getEscapedPath(originalPath);
+            tableImg.alt = currentDrinkName;
+            tableLabel.textContent = currentDrinkName;
+
+            // Clear old fallback badges
+            const container = document.getElementById('my-desk-item-container');
+            const oldFallback = container.querySelector('.fallback-badge');
+            if (oldFallback) {
+                oldFallback.remove();
+            }
+            tableImg.style.display = 'block';
+
+            // Save to purchased drink history
+            if (!purchasedDrinkHistory.includes(currentDrinkKey)) {
+                purchasedDrinkHistory.push(currentDrinkKey);
+                localStorage.setItem('miffy_purchased_drinks_v3', JSON.stringify(purchasedDrinkHistory));
+            }
+
+            refreshTrophyShelfRender();
+            goToScreen('study');
+        }
+
+        function triggerClockUpdateCycle() {
+            const d = new Date();
+            const hour = d.getHours();
+            const min = String(d.getMinutes()).padStart(2, '0');
+            const sec = String(d.getSeconds()).padStart(2, '0');
+
+            document.getElementById('clock-realtime-text').textContent = hour + ":" + min + ":" + sec;
+
+            const viewDay = document.getElementById('scenery-daylight');
+            const viewNight = document.getElementById('scenery-nightfall');
+            const desc = document.getElementById('sky-description');
+            const sun = document.getElementById('sky-sun-element');
+            const moon = document.getElementById('sky-moon-element');
+
+            // Daylight/Sunset and Night transition based on real-time hour
+            if (hour >= 6 && hour < 19) {
+                // Sunset & Day Light View (City Background.jpg)
+                viewDay.style.opacity = "1";
+                viewNight.style.opacity = "0";
+                
+                if (hour >= 16) {
+                    desc.textContent = 'วิวยามเย็นลายเส้นดินสอสีส้มอุ่น';
+                    desc.className = 'text-orange-700 font-bold';
+                } else {
+                    desc.textContent = 'วิวเมืองคาเฟ่สว่างไสว ช่วงบ่ายอบอุ่น';
+                    desc.className = 'text-amber-800 font-bold';
+                }
+                
+                sun.classList.remove('hidden');
+                moon.classList.add('hidden');
+            } else {
+                // Moonrise & Night View (download (7).jpg)
+                viewDay.style.opacity = "0";
+                viewNight.style.opacity = "1";
+                desc.textContent = 'ราตรีดินสอสเก็ตช์สงบเงียบใต้แสงจันทร์เสี้ยว';
+                desc.className = 'text-sky-800 font-bold';
+                
+                sun.classList.add('hidden');
+                moon.classList.remove('hidden');
+            }
+        }
+
+        // Preset Target Switch
+        function changeTimerTarget(mode) {
+            if (isClockRunning) {
+                if (!confirm("ต้องการเปลี่ยนเป้าหมายเวลาตอนนี้ไหม? ระบบจะล้างเวลาที่กำลังเดินอยู่จ้า")) {
+                    return;
+                }
+            }
+
+            focusTimerTargetMode = mode;
+            isRestBreakMode = false;
+            stopClockTicker();
+
+            // Reset preset class styles
+            document.querySelectorAll('.preset-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-[#fff9db]', 'border-amber-500');
+                btn.classList.add('bg-white');
+            });
+
+            const activeBtn = document.getElementById('preset-btn-' + mode);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-white');
+                activeBtn.classList.add('bg-[#fff9db]', 'border-amber-500');
+            }
+
+            if (mode === '25') {
+                clockSecondsLeft = 25 * 60;
+                clockTotalDuration = 25 * 60;
+                document.getElementById('timer-number-digits').textContent = "25:00";
+            } else if (mode === '30') {
+                clockSecondsLeft = 30 * 60;
+                clockTotalDuration = 30 * 60;
+                document.getElementById('timer-number-digits').textContent = "30:00";
+            } else if (mode === 'free') {
+                clockSecondsLeft = 0; // count upward
+                clockTotalDuration = 1;
+                document.getElementById('timer-number-digits').textContent = "00:00";
+            }
+
+            document.getElementById('timer-status-badge').textContent = "📖 พร้อมสำหรับการเริ่มอ่านแล้ว";
+            document.getElementById('timer-status-badge').className = "text-[10px] font-black text-[#b45309] bg-[#fffbf0] px-3.5 py-1 rounded-full mb-2";
+            document.getElementById('timer-progress-microbar').style.width = "100%";
+        }
+
+        function triggerTimerStart() {
+            if (isClockRunning) return;
+
+            isClockRunning = true;
+            document.getElementById('btn-timer-trigger').disabled = true;
+            document.getElementById('btn-timer-pause').disabled = false;
+
+            // Play rain sound on active focus
+            if (!isAmbientNoisePlaying) {
+                toggleAmbientRain();
+            }
+
+            // Visual state feedback
+            document.getElementById('timer-status-badge').textContent = isRestBreakMode ? "☕ ช่วงพักผ่อนดึงสายตา 5 นาทีจ้า" : "✍️ กำลังจดจ่อในการเรียน ค่อยๆ วาดทีละก้าว...";
+            document.getElementById('timer-status-badge').className = isRestBreakMode ? "text-[10px] font-black text-emerald-800 bg-emerald-50 px-3.5 py-1 rounded-full mb-2 animate-bounce" : "text-[10px] font-black text-amber-900 bg-amber-50 px-3.5 py-1 rounded-full mb-2 animate-pulse";
+
+            clockIntervalId = setInterval(() => {
+                if (focusTimerTargetMode === 'free') {
+                    // Upward counting (Free Mode)
+                    clockSecondsLeft++;
+                    freeModeElapsedSecs++;
+                    accumulatedStudySecs++;
+
+                    let h = Math.floor(clockSecondsLeft / 3600);
+                    let m = Math.floor((clockSecondsLeft % 3600) / 60);
+                    let s = clockSecondsLeft % 60;
+
+                    let formatStr = "";
+                    if (h > 0) {
+                        formatStr += String(h).padStart(2, '0') + ":";
+                    }
+                    formatStr += String(m).padStart(2, '0') + ":" + String(s).padStart(2, '0');
+                    document.getElementById('timer-number-digits').textContent = formatStr;
+
+                    // Progress microbar cycles every hour
+                    let percent = ((clockSecondsLeft % 3600) / 3600) * 100;
+                    document.getElementById('timer-progress-microbar').style.width = percent + "%";
+                } else {
+                    // Downward counting
+                    if (clockSecondsLeft > 0) {
+                        clockSecondsLeft--;
+                        accumulatedStudySecs++;
+
+                        let m = Math.floor(clockSecondsLeft / 60);
+                        let s = clockSecondsLeft % 60;
+                        document.getElementById('timer-number-digits').textContent = String(m).padStart(2, '0') + ":" + String(s).padStart(2, '0');
+
+                        let percent = (clockSecondsLeft / clockTotalDuration) * 100;
+                        document.getElementById('timer-progress-microbar').style.width = percent + "%";
+                    } else {
+                        // Finished timer cycle
+                        finishClockTargetCycle();
+                    }
+                }
+
+                // Sync data with storage every 10 seconds
+                if (accumulatedStudySecs % 10 === 0) {
+                    localStorage.setItem('miffy_total_accumulated_seconds_v3', accumulatedStudySecs);
+                }
+            }, 1000);
+        }
+
+        function triggerTimerPause() {
+            stopClockTicker();
+            document.getElementById('timer-status-badge').textContent = "⏸️ สมาธิหยุดพักชั่วคราว";
+            document.getElementById('timer-status-badge').className = "text-[10px] font-black text-stone-600 bg-stone-100 px-3.5 py-1 rounded-full mb-2";
+        }
+
+        function stopClockTicker() {
+            isClockRunning = false;
+            if (clockIntervalId) {
+                clearInterval(clockIntervalId);
+                clockIntervalId = null;
+            }
+            document.getElementById('btn-timer-trigger').disabled = false;
+            document.getElementById('btn-timer-pause').disabled = true;
+        }
+
+        function triggerTimerReset() {
+            if (focusTimerTargetMode === 'free' && clockSecondsLeft >= 3600) {
+                // Earn free study continuous gold trophy!
+                giftTrophy('free');
+            }
+            stopClockTicker();
+            changeTimerTarget(focusTimerTargetMode);
+        }
+
+        // Target Met Goal Completion
+        function finishClockTargetCycle() {
+            stopClockTicker();
+            playChimeSoundSynth();
+
+            if (!isRestBreakMode) {
+                giftTrophy(focusTimerTargetMode);
+
+                // Transition to rest mode
+                isRestBreakMode = true;
+                clockSecondsLeft = 5 * 60;
+                clockTotalDuration = 5 * 60;
+                
+                document.getElementById('timer-status-badge').textContent = "☕ ช่วงพักผ่อนดึงสายตา 5 นาทีจ้า";
+                document.getElementById('timer-status-badge').className = "text-[10px] font-black text-emerald-800 bg-emerald-50 px-3.5 py-1 rounded-full mb-2 animate-bounce";
+                document.getElementById('timer-progress-microbar').style.width = "100%";
+                document.getElementById('timer-number-digits').textContent = "05:00";
+
+                triggerToastBanner("🏆 ปลดล็อกถ้วยรางวัลสำเร็จ!", "คุณตั้งใจศึกษาเล่าเรียนจนครบเป้าหมาย ได้รับถ้วยรางวัลสเก็ตช์มิฟฟี่เกียรติยศ 1 ใบแล้วจ้า พร้อมเริ่มต้นพักสายตา 5 นาที", "🏆");
+            } else {
+                isRestBreakMode = false;
+                triggerToastBanner("⏰ หมดเวลาพักผ่อนสายตาแล้ว!", "ได้เวลากลับมานั่งจดจ่ออ่านหนังสือคู่กับคุณกระต่ายรอบโต๊ะกันต่อแล้วนะจ๊ะ", "📚");
+                changeTimerTarget(focusTimerTargetMode);
+            }
+        }
+
+        function giftTrophy(key) {
+            if (!earnedTrophyList.includes(key)) {
+                earnedTrophyList.push(key);
+                localStorage.setItem('miffy_earned_trophies_v3', JSON.stringify(earnedTrophyList));
+                refreshTrophyShelfRender();
+
+                let desc = "ได้รับรางวัลคุณกระต่ายทองแดง 25 นาที";
+                if (key === '25') desc = "ได้รับถ้วยรางวัลคุณกระต่ายทองแดงสมาธิแน่วแน่ (25 นาที) สำเร็จแล้ว!";
+                if (key === '30') desc = "ได้รับถ้วยรางวัลคุณกระต่ายเงินความพยายามยอดเยี่ยม (30 นาที) สำเร็จแล้ว!";
+                if (key === 'free') desc = "ได้รับถ้วยรางวัลคุณกระต่ายทองคำเกียรติยศสูงสุดจดจ่อต่อเนื่อง (1 ชม.+) สำเร็จแล้ว!";
+
+                triggerToastBanner("🏆 ยอดเยี่ยมมากเลยจ้า!", desc, "🎉");
+            }
+        }
+
+        function refreshTrophyShelfRender() {
+            document.getElementById('trophy-badge-count').textContent = earnedTrophyList.length;
+            document.getElementById('stats-badge-count').textContent = earnedTrophyList.length;
+            document.getElementById('stats-time-minutes').textContent = Math.round(accumulatedStudySecs / 60);
+
+            // Classic style SVG Color Unlocks
+            if (earnedTrophyList.includes('25')) {
+                document.getElementById('trophy-card-25').className = "bg-orange-50/70 border-2 border-solid border-orange-400 p-2 rounded-xl flex flex-col items-center justify-center text-center relative scale-105 shadow";
+                const svg = document.getElementById('trophy-svg-25');
+                svg.classList.remove('grayscale', 'opacity-25');
+                svg.classList.add('scale-105');
+                document.getElementById('trophy-status-25').textContent = "ปลดล็อกแล้ว ✨";
+                document.getElementById('trophy-status-25').className = "text-[8px] text-orange-700 font-bold";
+            }
+            if (earnedTrophyList.includes('30')) {
+                document.getElementById('trophy-card-30').className = "bg-slate-50 border-2 border-solid border-slate-400 p-2 rounded-xl flex flex-col items-center justify-center text-center relative scale-105 shadow";
+                const svg = document.getElementById('trophy-svg-30');
+                svg.classList.remove('grayscale', 'opacity-25');
+                svg.classList.add('scale-105');
+                document.getElementById('trophy-status-30').textContent = "ปลดล็อกแล้ว ✨";
+                document.getElementById('trophy-status-30').className = "text-[8px] text-slate-700 font-bold";
+            }
+            if (earnedTrophyList.includes('free')) {
+                document.getElementById('trophy-card-free').className = "bg-amber-50 border-2 border-solid border-amber-400 p-2 rounded-xl flex flex-col items-center justify-center text-center relative scale-105 shadow";
+                const svg = document.getElementById('trophy-svg-free');
+                svg.classList.remove('grayscale', 'opacity-25');
+                svg.classList.add('scale-105');
+                document.getElementById('trophy-status-free').textContent = "ระดับทองสูงสุด ✨";
+                document.getElementById('trophy-status-free').className = "text-[8px] text-amber-700 font-black";
+            }
+
+            // Stamp Beverage Badges
+            if (purchasedDrinkHistory.includes('matcha')) {
+                document.getElementById('badge-menu-matcha').classList.remove('opacity-30');
+                document.getElementById('badge-menu-matcha').classList.add('bg-emerald-50', 'border-emerald-400');
+            }
+            if (purchasedDrinkHistory.includes('cocoa')) {
+                document.getElementById('badge-menu-cocoa').classList.remove('opacity-30');
+                document.getElementById('badge-menu-cocoa').classList.add('bg-amber-50', 'border-amber-400');
+            }
+            if (purchasedDrinkHistory.includes('cookie')) {
+                document.getElementById('badge-menu-cookie').classList.remove('opacity-30');
+                document.getElementById('badge-menu-cookie').classList.add('bg-yellow-50', 'border-yellow-400');
+            }
+            if (purchasedDrinkHistory.includes('cake')) {
+                document.getElementById('badge-menu-cake').classList.remove('opacity-30');
+                document.getElementById('badge-menu-cake').classList.add('bg-rose-50', 'border-rose-400');
+            }
+        }
+
+        function clearAllTrophiesData() {
+            if (confirm("คุณแน่ใจว่าต้องการรีเซ็ตสถิติ ถ้วยรางวัลประดับตู้โชว์ และแสตมป์เครื่องดื่มทั้งหมดไหมจ๊ะ? ข้อมูลทั้งหมดจะหายไปนะ")) {
+                localStorage.removeItem('miffy_earned_trophies_v3');
+                localStorage.removeItem('miffy_purchased_drinks_v3');
+                localStorage.removeItem('miffy_total_accumulated_seconds_v3');
+                
+                earnedTrophyList = [];
+                purchasedDrinkHistory = [];
+                accumulatedStudySecs = 0;
+
+                // Reset trophy display states
+                document.getElementById('trophy-card-25').className = "bg-white/95 border-2 border-dashed border-[#4a3e3d] p-2 rounded-xl flex flex-col items-center justify-center text-center relative";
+                document.getElementById('trophy-svg-25').className = "w-12 h-12 filter grayscale opacity-25 transition-all duration-300";
+                document.getElementById('trophy-status-25').textContent = "ยังไม่ได้รับ";
+                document.getElementById('trophy-status-25').className = "text-[8px] text-gray-500";
+
+                document.getElementById('trophy-card-30').className = "bg-white/95 border-2 border-dashed border-[#4a3e3d] p-2 rounded-xl flex flex-col items-center justify-center text-center relative";
+                document.getElementById('trophy-svg-30').className = "w-12 h-12 filter grayscale opacity-25 transition-all duration-300";
+                document.getElementById('trophy-status-30').textContent = "ยังไม่ได้รับ";
+                document.getElementById('trophy-status-30').className = "text-[8px] text-gray-500";
+
+                document.getElementById('trophy-card-free').className = "bg-white/95 border-2 border-dashed border-[#4a3e3d] p-2 rounded-xl flex flex-col items-center justify-center text-center relative";
+                document.getElementById('trophy-svg-free').className = "w-12 h-12 filter grayscale opacity-25 transition-all duration-300";
+                document.getElementById('trophy-status-free').textContent = "ยังไม่ได้รับ";
+                document.getElementById('trophy-status-free').className = "text-[8px] text-gray-500";
+
+                document.querySelectorAll('[id^="badge-menu-"]').forEach(el => {
+                    el.classList.add('opacity-30');
+                    el.classList.remove('bg-emerald-50', 'bg-amber-50', 'bg-yellow-50', 'bg-rose-50', 'border-emerald-400', 'border-amber-400', 'border-yellow-400', 'border-rose-400');
+                });
+
+                refreshTrophyShelfRender();
+                closeTrophyCabin();
+            }
+        }
+
+        function loadYoutubeVideo(videoId, title) {
+            const iframe = document.getElementById('youtube-jukebox-iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1&controls=1`;
+            document.getElementById('jukebox-current-track-title').textContent = title;
+            
+            triggerToastBanner("🎵 กำลังบรรเลงเพลงใหม่", "แผ่นเสียงคาเฟ่เริ่มเปลี่ยนทำนอง: " + title, "🎶");
+        }
+
+        function searchAndPlayTrack() {
+            const query = document.getElementById('jukebox-search-input').value.trim();
+            if (!query) return;
+
+            // YouTube URL Parsing Check
+            if (query.includes("youtube.com") || query.includes("youtu.be")) {
+                const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+                const match = query.match(regExp);
+                if (match && match[2].length === 11) {
+                    loadYoutubeVideo(match[2], "ลิงก์วิดีโอของคุณ");
+                    return;
+                }
+            }
+
+            // Fallback search playlists
+            const lowerQuery = query.toLowerCase();
+            let matchedId = "5qap5aO4i9A"; // Default chill lofi
+            let matchedTitle = query;
+
+            if (lowerQuery.includes("rain") || lowerQuery.includes("ฝน")) {
+                matchedId = "Y-7gK9_kCHY";
+                matchedTitle = "เสียงฝนประกอบเสียงเปียโนบรรเลง";
+            } else if (lowerQuery.includes("piano") || lowerQuery.includes("เปียโน")) {
+                matchedId = "8X8_K3_wDww";
+                matchedTitle = "สเก็ตช์เปียโนจิบลีเพื่อสมาธิ";
+            } else if (lowerQuery.includes("ghibli") || lowerQuery.includes("จิบลี")) {
+                matchedId = "3jWRrafhO7M";
+                matchedTitle = "Ghibli Relaxing Instrumental lofi";
+            } else if (lowerQuery.includes("jazz") || lowerQuery.includes("แจ๊ส")) {
+                matchedId = "XqfS_3m866Q";
+                matchedTitle = "Cafe Coffee Jazz Instrumental";
+            } else if (lowerQuery.includes("miffy") || lowerQuery.includes("กระต่าย") || lowerQuery.includes("study")) {
+                matchedId = "5qap5aO4i9A";
+                matchedTitle = "Miffy Lo-Fi Study Beats";
+            } else {
+                iframeSearchQuery(query);
+                return;
+            }
+
+            loadYoutubeVideo(matchedId, matchedTitle);
+        }
+
+        function iframeSearchQuery(query) {
+            const iframe = document.getElementById('youtube-jukebox-iframe');
+            iframe.src = `https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(query)}&autoplay=1`;
+            document.getElementById('jukebox-current-track-title').textContent = query;
+            triggerToastBanner("🔍 ค้นหาคีย์เวิร์ดสำเร็จ", "กำลังเล่นวิดีโอแรกที่ตรงกับ: " + query, "🎵");
+        }
+
+        function toggleJukeboxPanel() {
+            triggerToastBanner("📻 ตู้เพลงคุณกระต่าย", "พิมพ์ชื่อเพลง ศิลปิน หรือวางลิงก์จาก YouTube เพื่อเริ่มฟังกันเลยจ้า!", "💿");
+            document.getElementById('jukebox-search-input').focus();
+        }
+
+        // Web Audio Synthesizer for Rain white noise
+        function initAudioContext() {
+            if (!ambientAudioCtx) {
+                ambientAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function toggleAmbientRain() {
+            initAudioContext();
+            
+            const btn = document.getElementById('sound-toggle-btn');
+            const icon = document.getElementById('sound-icon');
+            const txt = document.getElementById('sound-text');
+
+            if (!isAmbientNoisePlaying) {
+                playCozyRainStatic();
+                isAmbientNoisePlaying = true;
+                btn.classList.add('bg-[#fff9db]', 'border-amber-500');
+                icon.className = 'fa-solid fa-volume-high text-amber-600';
+                txt.textContent = 'ปิดเสียงฝน';
+            } else {
+                stopCozyRainStatic();
+                isAmbientNoisePlaying = false;
+                btn.classList.remove('bg-[#fff9db]', 'border-amber-500');
+                icon.className = 'fa-solid fa-volume-xmark';
+                txt.textContent = 'เสียงฝนตก';
+            }
+        }
+
+        function playCozyRainStatic() {
+            try {
+                initAudioContext();
+                const rate = ambientAudioCtx.sampleRate;
+                const bufferLen = rate * 2.5; 
+                const buff = ambientAudioCtx.createBuffer(1, bufferLen, rate);
+                const data = buff.getChannelData(0);
+
+                let lastOut = 0.0;
+                for (let i = 0; i < bufferLen; i++) {
+                    const rand = Math.random() * 2 - 1;
+                    data[i] = (lastOut + (0.018 * rand)) / 1.018;
+                    lastOut = data[i];
+                    data[i] *= 4.0; // amplify
+                }
+
+                noiseAudioBufferNode = ambientAudioCtx.createBufferSource();
+                noiseAudioBufferNode.buffer = buff;
+                noiseAudioBufferNode.loop = true;
+
+                const pass = ambientAudioCtx.createBiquadFilter();
+                pass.type = 'lowpass';
+                pass.frequency.setValueAtTime(550, ambientAudioCtx.currentTime);
+
+                noiseGainNode = ambientAudioCtx.createGain();
+                noiseGainNode.gain.setValueAtTime(0.15, ambientAudioCtx.currentTime);
+
+                noiseAudioBufferNode.connect(pass);
+                pass.connect(noiseGainNode);
+                noiseGainNode.connect(ambientAudioCtx.destination);
+
+                noiseAudioBufferNode.start(0);
+            } catch(e) {
+                console.warn("Audio Context rain synthesis failed", e);
+            }
+        }
+
+        function stopCozyRainStatic() {
+            if (noiseAudioBufferNode) {
+                try {
+                    noiseAudioBufferNode.stop();
+                } catch(e){}
+                noiseAudioBufferNode = null;
+            }
+        }
+
+        function playChimeSoundSynth() {
+            try {
+                initAudioContext();
+                const now = ambientAudioCtx.currentTime;
+                const scale = [698.46, 880.00, 1046.50, 1396.91]; // F major scale arpeggio
+
+                scale.forEach((freq, idx) => {
+                    const osc = ambientAudioCtx.createOscillator();
+                    const gain = ambientAudioCtx.createGain();
+
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, now + (idx * 0.14));
+
+                    gain.gain.setValueAtTime(0.15, now + (idx * 0.14));
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + (idx * 0.14) + 0.6);
+
+                    osc.connect(gain);
+                    gain.connect(ambientAudioCtx.destination);
+
+                    osc.start(now + (idx * 0.14));
+                    osc.stop(now + (idx * 0.14) + 0.75);
+                });
+            } catch(e){}
+        }
+
+        // Render Toast Notifications
+        function triggerToastBanner(title, desc, emoji) {
+            const toast = document.getElementById('status-toast');
+            document.getElementById('toast-title-render').textContent = title;
+            document.getElementById('toast-desc-render').textContent = desc;
+
+            toast.classList.remove('translate-y-28', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-28', 'opacity-0');
+            }, 6000);
+        }
+
+        // Modal triggers
+        function openTrophyCabin() {
+            refreshTrophyShelfRender();
+            document.getElementById('trophy-cabin-modal').classList.remove('hidden');
+        }
+
+        function closeTrophyCabin() {
+            document.getElementById('trophy-cabin-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
